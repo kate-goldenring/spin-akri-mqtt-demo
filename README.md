@@ -2,6 +2,11 @@
 
 Akri with MQTT Discovery Handler and Spin App Broker.
 
+Video of demo:
+https://www.loom.com/share/b8e987e67c4c46fe976913a09deb743f?sid=74333333-44cc-4682-9197-3935a99eecbb
+
+## Running the Demo
+
 1. Install kwasm
 2. Replace the installed `containerd-shim-spin-v2` with one with support for the Spin MQTT trigger: https://github.com/kate-goldenring/containerd-shim-spin/tree/mqtt-trigger:
 
