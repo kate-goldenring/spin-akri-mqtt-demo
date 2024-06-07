@@ -1,0 +1,36 @@
+apiVersion: akri.sh/v0
+kind: Configuration
+metadata:
+  name: akri-mqtt-device
+spec:
+  discoveryHandler:
+    name: mqtt
+    discoveryDetails: |+
+        mqttBrokerUri: "tcp://192.168.1.14:1883"
+        topics: ["hello", "goodbye", "wow"]
+        timeoutSeconds: 60
+  brokerSpec:
+    brokerPodSpec:
+      runtimeClassName: wasmtime-spin-v2
+      containers:
+      - name: akri-mqtt-broker
+        image: "ghcr.io/kate-goldenring/mqtt-message-logger:v1"
+        command: ["/"]
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+        resources:
+          limits:
+            "{{PLACEHOLDER}}" : "1"
+  instanceServiceSpec:
+    ports:
+    - name: grpc
+      port: 80
+      targetPort: 8083
+  configurationServiceSpec:
+    ports:
+    - name: grpc
+      port: 80
+      targetPort: 8083
+  brokerProperties: {}
+  capacity: 5
